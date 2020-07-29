@@ -51,6 +51,7 @@ const validateAuthToken = async (request: express.Request, response: express.Res
     return next();
   } catch (error) {
     const { code } = error;
+    console.error(new Error(error.message));
     if (code === 'auth/argument-error') {
       // Firebase ID Token error
       return response.status(401).send({
@@ -98,6 +99,7 @@ app.get('/reviews', async (request: express.Request, response: express.Response)
     });
     return response.status(200).send({ message: 'Success', code: 'success', status: true, data: { reviews } });
   } catch (error) {
+    console.error(new Error(error.message));
     return response.status(500).send({ message: 'Internal Server Error', code: 'api-error', status: false });
   }
 });
@@ -109,6 +111,7 @@ app.post('/add-restaurant', (request: express.Request, response: express.Respons
   try {
     return response.status(200).send({ message: 'Complete', code: 'success', status: true });
   } catch (error) {
+    console.error(new Error(error.message));
     return response.status(400).send({ message: `Bad Request: Can't process`, code: 'error', status: false });
   }
 });
@@ -119,6 +122,7 @@ app.post('/json', (request: express.Request, response: express.Response) => {
   try {
     return response.status(200).send({ message: 'Complete', code: 'success', status: true });
   } catch (error) {
+    console.error(new Error(error.message));
     return response.status(400).send({ message: `Bad Request: Can't process`, code: 'error', status: false });
   }
 });
