@@ -2,7 +2,8 @@
 
 [Cloud Functions For Firebase Boilerplate](#cloud-functions-for-firebase-boilerplate)
 
-- [Why is this important?](#why-is-this-important)
+- [Why is this important?
+  ](#why-is-this-important)
 - [Features](#features)
 - [Getting Started](#getting-started)
   - [Installation](#installation)
@@ -26,6 +27,8 @@ Questions, feedback, and contributions are welcome!
 ## Why is this important?
 
 > The simplicity of Cloud Functions lets you quickly develop code and run it in a serverless environment. At moderate scale, the cost of running functions is low, and optimizing your code might not seem like a high priority. As your deployment scales up, however, optimizing your code becomes increasingly important.
+>
+> -- Cloud Functions For Firebase Documentation
 
 ## Features
 
