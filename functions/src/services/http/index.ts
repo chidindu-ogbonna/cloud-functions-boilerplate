@@ -20,7 +20,7 @@ const app = express();
  * @param paths Request paths that do not pass through the middleware
  * @param middleware Middleware that is in being skipped
  */
-export const unless = (paths: Array<string>, middleware: any) => {
+const unless = (paths: Array<string>, middleware: any) => {
   return (request: express.Request, response: express.Response, next: any) => {
     if (paths.includes(request.path)) return next();
     else return middleware(request, response, next);
