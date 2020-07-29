@@ -15,8 +15,8 @@
   - [TypeScript](#typescript)
   - [Express.js](#express.js)
   - [Eslint setup](#eslint-setup)
-- [TODO](#todo)
 - [Resources](#resources)
+- [TODO](#todo)
 
 An ever-evolving, opinionated architecture and development environment for writing and structuring google cloud functions for firebase. It takes into account performance of cloud functions, and developer productivity.
 
@@ -121,11 +121,6 @@ Every Firebase HTTP function makes use of `express.js` underneath. Explicitly us
 
 An extensible eslint configuration, that gets you up and running
 
-## TODO
-
-- [Add Unit Tests](https://firebase.google.com/docs/functions/unit-testing)
-- [Improve error reporting](https://firebase.google.com/docs/functions/reporting-errors#manually_reporting_errors)
-
 ## Resources
 
 - [Cloud Functions Documentation](https://firebase.google.com/docs/functions)
@@ -134,3 +129,8 @@ An extensible eslint configuration, that gets you up and running
 - [Building idempotent functions](https://cloud.google.com/blog/products/serverless/cloud-functions-pro-tips-building-idempotent-functions)
 - [Using retries to build reliable serverless systems](https://cloud.google.com/blog/products/serverless/cloud-functions-pro-tips-using-retries-to-build-reliable-serverless-systems)
 - [Organize Cloud Functions for max cold start performance and readability with TypeScript and Firebase](https://medium.com/firebase-developers/organize-cloud-functions-for-max-cold-start-performance-and-readability-with-typescript-and-9261ee8450f0)
+
+## TODO
+
+- [Add Unit Tests](https://firebase.google.com/docs/functions/unit-testing)
+- [Improve error reporting](https://firebase.google.com/docs/functions/reporting-errors#manually_reporting_errors)
