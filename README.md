@@ -78,15 +78,16 @@ Place your service account files in the `service-account` folder, based on envir
 
 > _You can name your service accounts whatever you like, but make sure to change the sections where the service account file is referenced._
 
-**Production environment:** Rename your service account file to `prod-service-account.json`
+- **Production environment:** Rename your service account file to `prod-service-account.json`
 
-**Staging environment:** Rename your service account to file `staging-service-account.json`
+- **Staging environment:** Rename your service account to file `staging-service-account.json`
 
-**Development environment:** Rename your service account to file `dev-service-account.json`
+- **Development environment:** Rename your service account to file `dev-service-account.json`
 
 ### Testing
 
 After setting up the environment, service accounts and permissions, testing becomes the next thing.
+
 Run `npm run local` in your terminal to run functions locally.
 
 ### Example Folder Structure
@@ -97,18 +98,21 @@ Run `npm run local` in your terminal to run functions locally.
 
 ### Improved cold start performance
 
-Cold start (Cold boot) time has been one of the [biggest issues](https://www.youtube.com/watch?v=IOXrwFqR6kY) many developers and companies come across when using cloud functions. This boilerplate uses the best practices to reduce the cold start time thus improving performance
-Making use of TypeScripts [dynamic 'async' import](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-4.html#dynamic-import-expressions), this ensures unused code and imports and not loaded unncessarily during start time but only when the specific function is invoked.
+Cold start (Cold boot) time has been one of the [biggest issues](https://www.youtube.com/watch?v=IOXrwFqR6kY) many developers and companies come across when using cloud functions. This boilerplate uses the best practices to reduce the cold start time thus improving performance.
+
+By taking advantage of TypeScripts [dynamic 'async' import](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-4.html#dynamic-import-expressions), this ensures unused code and imports and not loaded unncessarily during start time but only when the specific function is invoked.
 
 ### Improved readability & developer experience
 
 Using only one file, `index.js`, for everything doesn't work for a serious app. It becomes hard to scan through, hard to easily follow up with the code. This boilerplate recognizes that and aims to solve that.
+
 There have been a lot of ways suggested to split cloud functions properly, Firebase also has [suggestions](https://firebase.google.com/docs/functions/organize-functions), but it doesn't take into account the effect on the **cold start time**.
 
 ### TypeScript
 
 While everything done here can be achieved using plain JavaScript, it would require more code, more time, and a lot of experience using JavaScript, which in my opinion is counter-intuitive. You should not have to spend time fighting with the tool and trying to optimize it to achieve a task.
-TypeScript removes that overhead, providing a more convenient means of writing JavaScript.
+
+TypeScript removes that overhead, providing a more convenient means of writing JavaScript. It's also [advised](https://www.youtube.com/watch?v=tResEeK6P5I&t=1514s) to write cloud functions using TypeScript.
 
 ### Express.js
 
