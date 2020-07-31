@@ -10,22 +10,11 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 
+import { generateHTTPRequest, reportError, unless } from '../../helpers/utils';
+
 admin.initializeApp();
 const db = admin.firestore();
 const app = express();
-
-/**
- * Similar to express-unless; this skips the middleware,
- * if the request.path is in the array of paths (both passed to this function)
- * @param paths Request paths that do not pass through the middleware
- * @param middleware Middleware that is in being skipped
- */
-const unless = (paths: Array<string>, middleware: any) => {
-  return (request: express.Request, response: express.Response, next: any) => {
-    if (paths.includes(request.path)) return next();
-    else return middleware(request, response, next);
-  };
-};
 
 /**
  * Validate authorization token passed in the authorization field of the request header
@@ -100,11 +89,12 @@ app.get('/reviews', async (request: express.Request, response: express.Response)
     return response.status(200).send({ message: 'Success', code: 'success', status: true, data: { reviews } });
   } catch (error) {
     console.error(new Error(error.message));
+    await reportError(error, { request: generateHTTPRequest(request) });
     return response.status(500).send({ message: 'Internal Server Error', code: 'api-error', status: false });
   }
 });
 
-app.post('/add-restaurant', (request: express.Request, response: express.Response) => {
+app.post('/add-restaurant', async (request: express.Request, response: express.Response) => {
   console.log('A request buffer: ', request.body);
   // XXX: Use a form parser to process this request
 
@@ -112,17 +102,19 @@ app.post('/add-restaurant', (request: express.Request, response: express.Respons
     return response.status(200).send({ message: 'Complete', code: 'success', status: true });
   } catch (error) {
     console.error(new Error(error.message));
+    await reportError(error, { request: generateHTTPRequest(request) });
     return response.status(400).send({ message: `Bad Request: Can't process`, code: 'error', status: false });
   }
 });
 
-app.post('/json', (request: express.Request, response: express.Response) => {
+app.post('/json', async (request: express.Request, response: express.Response) => {
   console.log('A json request: ', request.body);
 
   try {
     return response.status(200).send({ message: 'Complete', code: 'success', status: true });
   } catch (error) {
     console.error(new Error(error.message));
+    await reportError(error, { request: generateHTTPRequest(request) });
     return response.status(400).send({ message: `Bad Request: Can't process`, code: 'error', status: false });
   }
 });
