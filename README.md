@@ -137,4 +137,4 @@ An extensible eslint configuration, that gets you up and running
 ## TODO
 
 - [x] [Improve error reporting](https://firebase.google.com/docs/functions/reporting-errors#manually_reporting_errors)
-- [] [Add unit tests](https://firebase.google.com/docs/functions/unit-testing)
+- [ ] [Add unit tests](https://firebase.google.com/docs/functions/unit-testing)
