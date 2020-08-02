@@ -34,7 +34,7 @@ Questions, feedback, and contributions are welcome!
 
 - **[Improved cold start performance](#improved-cold-start)** - Cold start/boot time is one of the biggest issues many developers and companies come across when using cloud functions. This boilerplate uses the best practices to reduce the cold start time thus improving performance.
 
-- **[Improved readability & developer experience](#improved-readability-&-developer-experience)** Using only one file, `index.js` for everything doesn't work for a serious app. It becomes hard to scan through, hard to easily follow up with the code. This boilerplate recognizes that and aims to solve that.
+- **[Improved readability & developer experience](#improved-readability-&-developer-experience)** - Using only one file, `index.js` for everything doesn't work for a serious app. It becomes hard to scan through, hard to easily follow up with the code. This boilerplate recognizes that and aims to solve that.
 
 - **[TypeScript](#typescript)** - While everything done here can be achieved using plain JavaScript, it would require more code, a lot of experience using JavaScript, and time, which in my opinion is counter-intuitive. You should not have to spend time optimizing the tool to achieve a task!
 
@@ -136,5 +136,5 @@ An extensible eslint configuration, that gets you up and running
 
 ## TODO
 
+- [x] [Improve error reporting](https://firebase.google.com/docs/functions/reporting-errors#manually_reporting_errors)
 - [Add Unit Tests](https://firebase.google.com/docs/functions/unit-testing)
-- [Improve error reporting](https://firebase.google.com/docs/functions/reporting-errors#manually_reporting_errors)

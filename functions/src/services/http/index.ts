@@ -10,7 +10,7 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 
-import { generateHTTPRequest, reportError, unless } from '../../helpers/utils';
+import { reportError, unless } from '../../helpers/utils';
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -18,6 +18,7 @@ const app = express();
 
 /**
  * Validate authorization token passed in the authorization field of the request header
+ *
  * @param request express request
  * @param response express response
  * @param next go to the next
@@ -39,6 +40,7 @@ const validateAuthToken = async (request: express.Request, response: express.Res
     request['user'] = decodedToken;
     return next();
   } catch (error) {
+    await reportError(error, request, {});
     const { code } = error;
     console.error(new Error(error.message));
     if (code === 'auth/argument-error') {
@@ -89,7 +91,7 @@ app.get('/reviews', async (request: express.Request, response: express.Response)
     return response.status(200).send({ message: 'Success', code: 'success', status: true, data: { reviews } });
   } catch (error) {
     console.error(new Error(error.message));
-    await reportError(error, { request: generateHTTPRequest(request) });
+    await reportError(error, request, {});
     return response.status(500).send({ message: 'Internal Server Error', code: 'api-error', status: false });
   }
 });
@@ -102,7 +104,7 @@ app.post('/add-restaurant', async (request: express.Request, response: express.R
     return response.status(200).send({ message: 'Complete', code: 'success', status: true });
   } catch (error) {
     console.error(new Error(error.message));
-    await reportError(error, { request: generateHTTPRequest(request) });
+    await reportError(error, request, {});
     return response.status(400).send({ message: `Bad Request: Can't process`, code: 'error', status: false });
   }
 });
@@ -114,7 +116,7 @@ app.post('/json', async (request: express.Request, response: express.Response) =
     return response.status(200).send({ message: 'Complete', code: 'success', status: true });
   } catch (error) {
     console.error(new Error(error.message));
-    await reportError(error, { request: generateHTTPRequest(request) });
+    await reportError(error, request, {});
     return response.status(400).send({ message: `Bad Request: Can't process`, code: 'error', status: false });
   }
 });

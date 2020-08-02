@@ -19,28 +19,28 @@ export const unless = (
 };
 
 /**
- * Generate HTTP object for request before reporting error
- *
- * @param request Request that was made
- */
-export const generateHTTPRequest = (request: functions.Request): object => {
-  const httpRequest = {
-    method: request.method,
-    endpoint: request.path,
-    url: request.originalUrl,
-    userAgent: request.get('user-agent'),
-    remoteIp: request.ip,
-  };
-  return httpRequest;
-};
-
-/**
  * Report error to Stackdriver logging
  *
  * @param error Error that occurred
+ * @param request A http request | undefined if not a http function
  * @param context Context of the error
  */
-export const reportError = (error: any, context = {}): Promise<any> => {
+export const reportError = (error: any, request?: functions.Request, context = {}): Promise<any> => {
+  let httpRequest: object;
+
+  if (request) {
+    httpRequest = {
+      method: request.method,
+      endpoint: request.path,
+      url: request.originalUrl,
+      userAgent: request.get('user-agent'),
+      remoteIp: request.ip,
+      headers: request.headers,
+    };
+  } else {
+    httpRequest = {};
+  }
+
   const logging = new Logging({ projectId: process.env.GCLOUD_PROJECT });
 
   const logName = 'errors';
@@ -53,7 +53,7 @@ export const reportError = (error: any, context = {}): Promise<any> => {
     },
   };
 
-  const errorEvent = { message: error.stack, context };
+  const errorEvent = { message: error.stack, context: { ...context, request: httpRequest } };
 
   return new Promise((resolve, reject) => {
     log.write(log.entry(metadata, errorEvent), (error) => {
