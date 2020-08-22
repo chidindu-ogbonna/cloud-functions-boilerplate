@@ -20,6 +20,7 @@ export const unless = (
 
 /**
  * Report error to Stackdriver logging
+ * https://cloud.google.com/logging/docs/reference/libraries#client-libraries-install-nodejs
  *
  * @param error Error that occurred
  * @param request A http request | undefined if not a http function
@@ -49,7 +50,13 @@ export const reportError = (error: any, request?: functions.Request, context = {
   const metadata: object = {
     resource: {
       type: 'cloud_function',
-      labels: { function_name: process.env.FUNCTION_NAME },
+      labels: {
+        // function_name: process.env.FUNCTION_NAME,    // Nodejs 8
+        function_name: process.env.K_SERVICE, // Nodejs 10
+        region: process.env.FUNCTION_REGION,
+      },
+      // See: https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#logseverity
+      severity: 'INFO',
     },
   };
 
